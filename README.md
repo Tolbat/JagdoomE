@@ -43,7 +43,7 @@ A warning will appear, ignore it.
 setpath 
 ```
 
-You should now see the prompt change to C:\Jaguar\Source
+You should now see the prompt change to C:\Jaguar\Src
 
 
 STEP 1
