@@ -149,7 +149,7 @@ or a PS/2 mouse with appropriate adapter for upcoming mouse support.
 ## Acknowledgements
 ```
 John Carmack for writing such an awesome game, and releasing it to the public.
-Carl Forhan for arranging for the code, and doing the initial work to get it
+Carl Forhan for arranging the code, and doing the initial work to get it
 running.
 CyranoJ for fixing the offset in the HUD in the code released by Carl.
 Saturn for his work on the Windows build back in the days of Skunk.
