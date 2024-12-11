@@ -9,8 +9,11 @@ While it is easier and takes less steps in Linux, we are going to use Windows 10
 
 ## Additional Tools Required for Windows
 DosBox 74-3
+
 Python for windows
+
 GetTheWad.py - provided by Tolbat
+
 PadTempBin1.py - provided by Tolbat
 
 ## Creating your Doom IWAD file
