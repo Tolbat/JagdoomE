@@ -90,6 +90,7 @@ Linux does not do the padding outside of make!
 
 
 STEP 5
+
 Open the cmd prompt on your windows 10 environment - NOT DosBox and change directory to:  C:\jaguar\PadTheTempBins
 Run PadTempBin1.py
 This pads the temp1.bin to 256k in rom format
