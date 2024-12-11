@@ -62,9 +62,9 @@ make jagdoom
 ```
 
 Note: In WINDOWS ONLY DosBox runs out of table memory when moving the temp files around.
-DosBox and DosBoxX will both crash with a warning that says "Not Enough #Memory for Internal Tables".
+DosBox and DosBoxX will both crash with a warning that says "Not Enough Memory for Internal Tables".
 Reopen DosBox and use make jagdoom command again, do this until it spits out #doom.abs
-From the beginning of the process if you open DosBox and do make clean, #then make it should only crash once, and does ## NOT effect the compile process.
+From the beginning of the process if you open DosBox and do make clean, then make it should only crash once, and does NOT effect the compile process.
 
 Now that you have doom.abs we can continue.
 
