@@ -2,13 +2,16 @@
 
 This project allows you to build Doom for the Jaguar under linux. It uses the latest toolchain released by Atari which was put into the Public Domain. You can read about the Jaguar saga elsewhere - we're just concerned with Doom. We can thank Carl Forhan from Songbird Productions for that. He talked Carmack into releasing the Jaguar source, then played with it enough to get it to work on real hardware, then released the source for others to play with.
 
-Having never worked on Doom for any platform, I always wanted to work on the Jaguar, and have it available to anyone and everyone.  Using the work Saturn posted back in 2015, and with the assistance of ChillyWillyGuru I have returned the old Windows DOS build back to service.  While it is easier and takes less steps in linux. We are going to use Windows 10 64 bit.
+Having never worked on Doom for any platform, I always wanted to work on the Jaguar, and have it available to anyone and everyone.  
+Using the work Saturn posted back in 2015, and with the assistance of ChillyWillyGuru 
+I have returned the old Windows DOS build back to service.  
+While it is easier and takes less steps in Linux, we are going to use Windows 10 64 bit.
 
 ## Additional Tools Required for Windows
-1:  DosBox 74-3
-2:  Python for windows
-3:  GetTheWad.py - provided
-4:  PadTempBin1.py - provided
+1-  DosBox 74-3
+2-  Python for windows
+3-  GetTheWad.py - provided by Tolbat
+4-  PadTempBin1.py - provided by Tolbat
 
 ## Creating your Doom IWAD file
 Assuming you don't have the wad file for the game, but you DO have the original
@@ -17,24 +20,29 @@ C:\jaguar\GetMyWad directory, and make sure it's named "Doom.j64".
 You can then create the wad file by running GetTheWad.py it will then be placed in C:\jaguar\src
 
 ## Setting up the Enviroment:
-In this example we will use the root windows directory C:\  You may use any drive you wish but you will need to update all the different filepaths yourself.
+In this example we will use the root windows directory C:\  
+You may use any drive you wish but you will need to update all the different filepaths yourself.
 
 Place the Jaguar folder in the root of C:\
 Place setpath.bat in the root of C:\
 open DosBox 74-3 and type 
+
 ```
 mount C: C:\ 
 ```
+
 A warning will appear, ignore it.
-Now 
+
 ```
 setpath 
 ```
+
 You should now see the prompt change to C:\Jaguar\Source
 
 
 STEP 1
 First we need to prep the build enviroment.  Lets clean it and prep init.sav to become init.o
+
 ```
 make clean
 ```
@@ -42,9 +50,11 @@ make clean
 
 STEP 2
 #TO BUILD THE DOOM GAME FOR JAGUAR # must start by creating doom.abs
+
 ```
 make jagdoom
 ```
+
 Note: In WINDOWS ONLY DosBox runs out of table memory when moving the temp files around.
 DosBox and DosBoxX will both crash with a warning that says "Not Enough #Memory for Internal Tables".
 Reopen DosBox and use make jagdoom command again, do this until it spits out #doom.abs
@@ -54,17 +64,21 @@ Now that you have doom.abs we can continue.
 
 
 STEP 3
+
 ```
 make boot 
 ```
+
 creates needed bootfiles
 boot.abs
 
 
 STEP 4
+
 ```
 make rom:
 ```
+
 This merges the boot.abs and doom.abs, after this we need to pad it to 256k
 Linux does not do the padding outside of make!
 
@@ -76,9 +90,11 @@ This pads the temp1.bin to 256k in rom format
 
 
 STEP 6
+
 ```
 make rom2:
 ```
+
 #merges the padded rom with the doom.wad file.
 	
 	copy /b C:\Jaguar\Temp\temp1.bin+doom.wad C:\Jaguar\Temp\temp2.bin
