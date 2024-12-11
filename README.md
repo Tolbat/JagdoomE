@@ -1,11 +1,13 @@
 # Doom for the Atari Jaguar - Extended Edition JagdoomE
 
-This project allows you to build Doom for the Jaguar under linux. It uses the latest toolchain released by Atari which was put into the Public Domain. You can read about the Jaguar saga elsewhere - we're just concerned with Doom. We can thank Carl Forhan from Songbird Productions for that. He talked Carmack into releasing the Jaguar source, then played with it enough to get it to work on real hardware, then released the source for others to play with.
+This project allows you to build Doom for the Jaguar im Windows 10. It uses the latest toolchain released by Atari which was put into the Public Domain. You can read about the Jaguar saga elsewhere - we're just concerned with Doom. 
+We can thank Carl Forhan from Songbird Productions for that. 
+He talked Carmack into releasing the Jaguar source, then played with it enough to get it to work on real hardware, then released the source for others to play with.
 
-Having never worked on Doom for any platform, I always wanted to work on the Jaguar, and have it available to anyone and everyone.  
-Using the work Saturn posted back in 2015, and with the assistance of ChillyWillyGuru 
-I have returned the old Windows DOS build back to service.  
-While it is easier and takes less steps in Linux, we are going to use Windows 10 64 bit.
+Having never worked on Doom for any platform, I decided after waiting for an eternity, to give it a try.  
+Began using the work Saturn posted back in 2015, and then luckily got the assistance of ChillyWillyGuru.
+It fell on the Green Lizard to revive the old Windows DOS build.  It presented some limitations.  
+While it is easier and takes less steps in Linux, Windows is quite capable of producing a rom.  The biggest issue is DoxBox and how it manages table memory.
 
 ## Additional Tools Required for Windows
 DosBox 74-3
@@ -17,10 +19,11 @@ GetTheWad.py - provided by Tolbat
 PadTempBin1.py - provided by Tolbat
 
 ## Creating your Doom IWAD file
-Assuming you don't have the wad file for the game, but you DO have the original
+Assuming you don't already have the wad file for the game, but you DO have the original
 Jaguar Doom rom image (not provided!), copy the Jaguar Doom rom image into the
 C:\jaguar\GetMyWad directory, and make sure it's named "Doom.j64". 
 You can then create the wad file by running GetTheWad.py it will then be placed in C:\jaguar\src
+Now you have your wad file!
 
 ## Setting up the Enviroment:
 In this example we will use the root windows directory C:\  
@@ -152,19 +155,20 @@ CyranoJ for fixing the offset in the HUD in the code released by Carl.
 Saturn for his work on the Windows build back in the days of Skunk.
 ChillyWillyGuru for providing the cleaner Linux build, makefile, new controls,
 and his improvements.
-JagChris for assisting in communication, ideas, and motivation
-Atari Age for providing the original source code
+JagChris for organizing and planning
+Atari Age for providing the original source code online
+To the entire Jaguar Community that like me are forced to live in silence!
 ```
 
 ## Known Bugs
 
 The init.s file needs some work. It didn't work as it came from Carl. ChillyWilluGuru made
 some changes that get it working in BigPEmu, but it doesn't work on a real
-console - yet. I'll work on it until it does, but until then, we use Carl's
+console - yet. Chilly will work on it until it does, but until then, we use Carl's
 workaround to handle the initialization code.
 
-The network code is still as it was - kinda buggy. I don't know if or when I
-will get to it. I only have one Jaguar, and the JagGD cart is not compatible
+The network code is still as it was - kinda buggy. Chilly doesn't know if or when he
+will get to it. He only has one Jaguar, and the JagGD cart is not compatible
 with JagLink in any case.
 
 
