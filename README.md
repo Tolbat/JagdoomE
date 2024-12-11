@@ -8,10 +8,10 @@ I have returned the old Windows DOS build back to service.
 While it is easier and takes less steps in Linux, we are going to use Windows 10 64 bit.
 
 ## Additional Tools Required for Windows
-1-  DosBox 74-3
-2-  Python for windows
-3-  GetTheWad.py - provided by Tolbat
-4-  PadTempBin1.py - provided by Tolbat
+DosBox 74-3
+Python for windows
+GetTheWad.py - provided by Tolbat
+PadTempBin1.py - provided by Tolbat
 
 ## Creating your Doom IWAD file
 Assuming you don't have the wad file for the game, but you DO have the original
