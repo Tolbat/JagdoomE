@@ -154,6 +154,8 @@ with JagLink in any case.
 
 
 ## Changelog
+
+For Up to date Src folder please visit the Linux GitHub page: 
 ```
-For Up to date Src folder please visit the Linux GitHub page:  https://github.com/ChillyWillyGuru/JagDoomEX/
+https://github.com/ChillyWillyGuru/JagDoomEX/
 ```
