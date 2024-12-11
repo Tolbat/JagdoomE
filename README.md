@@ -98,11 +98,7 @@ STEP 6
 make rom2:
 ```
 
-#merges the padded rom with the doom.wad file.
-	
-	copy /b C:\Jaguar\Temp\temp1.bin+doom.wad C:\Jaguar\Temp\temp2.bin
-	copy /b C:\Jaguar\Temp\temp2.bin JagDoomT.j64	
-
+merges the padded rom with the doom.wad file.
 creates the rom
 JagdoomT.j64
 
