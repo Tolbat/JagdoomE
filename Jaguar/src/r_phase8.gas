@@ -79,7 +79,10 @@ dv_sprtop		.equr	r8
 dv_stopx		.equr	r7
 dv_fracstep		.equr	r6
 
-dv_vis		.equr	r15
+dv_vis		    .equr	r15
+
+dv_cmd			.equr	r26
+
 
 	load	(FP),dv_vis
 
@@ -87,11 +90,11 @@ dv_vis		.equr	r15
 	load	(dv_vis+8),dv_patch		; vis->patch
 	load	(dv_vis+6),dv_iscale	; vis->yiscale	 
  	load	(dv_vis+2),dv_xfrac		; vis->startfrac
-	load	(dv_vis+5),dv_spryscale		; spryscale
+	load	(dv_vis+5),dv_spryscale	; spryscale
 	
 	shrq	#8,dv_spryscale			; make fit in 16 bits
 	
-	load	(dv_vis+7),MATH_A			; vis->texturemid
+	load	(dv_vis+7),MATH_A		; vis->texturemid
  
 ;======= FixedMul 16 * +-32 ===
  
@@ -114,37 +117,49 @@ fixednotneg:
 	movei #5898240,dv_sprtop
 	sub RETURNVALUE,dv_sprtop
 
-	movei	#$f02238,r0
+	movei	#$f02238,r0         ; status/command
 blitwait1:
 	load	(r0),r1
 	btst	#0,r1
 	jr		EQ,blitwait1
 	nop
 	
-	movei	#15737344,r0
-	load	(dv_vis+14),r1		; vis->pixels
+	movei	#$f02200,r0         ; A1 base
+	load	(dv_vis+14),r1	    ; vis->pixels
 	store	r1,(r0)
 
-	movei	#15737360,r0
+	movei	#$f02210,r0         ; A1 step int
 	move	dv_iscale,r1
 	sharq	#16,r1
 	store	r1,(r0)
 
-	movei	#15737364,r0
-	move	dv_iscale,r1 ; local iscale
+	movei	#$f02214,r0         ; A1 step frac
+	move	dv_iscale,r1        ; local iscale
 	shlq	#16,r1
-	shrq	#16,r1		; mask off high bits
+	shrq	#16,r1		        ; mask off high bits
 	store 	r1,(r0)
 
-	load	(dv_vis+9),r0	; vis->colormap
+; chillywilly: check if invisible
+
+    movei   #$41802F01,dv_cmd   ; default command
+	load	(dv_vis+9),r0	    ; vis->colormap
+    movei   #-1,r1
+    cmp     r1,r0
+    jr      NE,skip1
+    nop
+;    movei   #$41002F01,dv_cmd   ; command if invisible (hole in spacetime)
+;    movei   #$41202F01,dv_cmd   ; command if invisible (ghostly phantoms)
+    movei   #$4102EF09,dv_cmd   ; command if invisible (translucent green/purple)
+    moveq   #0,r0
+skip1:
 	movei	#255,r1
 	sub		r0,r1
 	shlq	#14,r1
 	neg		r1
 	shlq	#8,r1
 	shrq	#8,r1			; mask off high 8 bits
-	movei	#$f02270,r0
-	store	r1,(r0)			; blitter iinc
+	movei	#$f02270,r0     ; intensity inc
+	store	r1,(r0)
 
 	
 ;===========================
@@ -272,9 +287,10 @@ blitwait2:
 
 	shlq	#16,dv_bottom
 	addq	#1,dv_bottom
-	store	dv_bottom,(dv_blitter+15)		; count
+	store	dv_bottom,(dv_blitter+15)	; count
 
-	movei	#1098919681,r1
+;	movei	#$41802F01,r1               ; command
+    move    dv_cmd,r1
 	store	r1,(dv_blitter+14)
 
 

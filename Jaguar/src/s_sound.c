@@ -294,7 +294,7 @@ void S_StartSong(int music_id, int looping)
 
 	int lump;
 
-/*	next_eventtime = musictime; */
+	next_eventtime = musictime;
 	musictime = 0;
 	samples_per_midiclock = 0;
 	lump = W_GetNumForName(S_music[music_id].name);

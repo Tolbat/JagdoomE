@@ -1194,11 +1194,37 @@ L117:
 
 L118:
 
+; chillywilly: check MF_SHADOW
+
  load (FP+24),r0 ; local thing
- movei #40,r1
+ movei #100,r1  ; flags
  add r1,r0
  load (r0),r0
- movei #32768,r1
+ movei #262144,r1 ; MF_SHADOW
+ and r1,r0
+ moveq #0,r1
+ cmp r0,r1
+ movei #L219,scratch
+ jump EQ,(scratch) ; not invisible
+ nop
+
+ movei #36,r0
+ move r15,r1 ;(vis)
+ add r0,r1
+ movei #-1,r0 ; invisible
+ store r0,(r1)
+
+ movei #L120,r0 ; skip rest of colormap setting
+ jump T,(r0)
+ nop
+
+L219:
+
+ load (FP+24),r0 ; local thing
+ movei #40,r1 ; frame (may be FF_FULLBRIGHT)
+ add r1,r0
+ load (r0),r0
+ movei #32768,r1 ; FF_FULLBRIGHT
  and r1,r0
  moveq #0,r1
  cmp r0,r1
@@ -1209,7 +1235,7 @@ L118:
  movei #36,r0
  move r15,r1 ;(vis)
  add r0,r1
- movei #255,r0
+ movei #255,r0 ; full bright
  store r0,(r1)
 
  movei #L120,r0
