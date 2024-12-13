@@ -1,6 +1,6 @@
 # Doom for the Atari Jaguar - Extended Edition JagdoomE
 
-This project allows you to build Doom for the Jaguar im Windows 10. It uses the latest toolchain released by Atari which was put into the Public Domain. You can read about the Jaguar saga elsewhere - we're just concerned with Doom. 
+This project allows you to build Doom for the Atari Jaguar in Windows 10. It uses the latest toolchain released by Atari which was put into the Public Domain. You can read about the Jaguar saga elsewhere - we're just concerned with Doom. 
 We can thank Carl Forhan from Songbird Productions for that. 
 He talked Carmack into releasing the Jaguar source, then played with it enough to get it to work on real hardware, then released the source for others to play with.
 
