@@ -146,6 +146,12 @@ The pad controller goes into port 1. When mouse support is done, it will plug
 into port 2. You will need an Atari ST or Amiga mouse with appropriate adapter,
 or a PS/2 mouse with appropriate adapter for upcoming mouse support.
 
+## Additional Tools for later
+getthehex2v1  - finds the iwad offset and updates jagonly.c
+
+getthehex3v1  - finds the iwad offset and updates jagonly.c and boot.s
+
+Note - if these files have actually increased in size you will need to make more changes.
 
 ## Acknowledgements
 ```
