@@ -385,7 +385,7 @@ boolean	I_RefreshLatched (void)
 ==================== 
 = 
 = I_WadBase  
-=
+=0x83F1C0 0x840000 0x83F0A0
 = Return a pointer to the wadfile.  In a cart environment this will
 = just be a pointer to rom.  In a simulator, load the file from disk.
 ==================== 
