@@ -178,6 +178,22 @@ The network code is still as it was - kinda buggy. Chilly doesn't know if or whe
 will get to it. He only has one Jaguar, and the JagGD cart is not compatible
 with JagLink in any case.
 
+## TIME SAVER for DOSBox
+
+Insert the following into the [autoexec] portion of the dosbox-0.74-3.conf file - this speeds 
+things up.
+
+---
+MOUNT C C:\
+
+C:
+
+setpath
+
+pause
+---
+
+
 
 ## Changelog
 
