@@ -151,7 +151,7 @@ getthehex2v1  - finds the iwad offset and updates jagonly.c
 
 getthehex3v1  - finds the iwad offset and updates jagonly.c and boot.s
 
-Note - if these files have actually increased in size you will need to make more changes.
+Note - These may be useless but they can find the WAD file if for some reason its smaller, may need more work to logic.
 
 ## Acknowledgements
 ```
