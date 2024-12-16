@@ -222,8 +222,9 @@ Last Updated: 12-15-2024
 
 ## Alt Tolbat src Changelog and info
 
----
+
 New Controls:
+```
 JP_1 - toggles pistol/fist
 JP_2 - forward
 JP_3 - toggles chaingun/shotgun
@@ -236,8 +237,9 @@ JP_9 - toggles Plasma / BFG
 JP_* - toggles all weapons >
 JP_0 - MAP
 JP_# - toggles weapons <
-
+```
+```
 HUD -  now displays Equipped weapons only unless in melee mode - shows weapons owned - in case player is stoned
 and cant remember what weapons they have.... :P
+```
 
----
