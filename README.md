@@ -209,6 +209,7 @@ For Up to date Src folder please visit the Linux GitHub page:
 https://github.com/ChillyWillyGuru/JagDoomEX/
 
 Last Updated: 12-15-2024
+241215 - Revert Init.s to use old init.o - not fixed per Chilly 
 241215 - Fixed sprites sometimes visible thru walls bug.
 241215 - Fixed transparent spectres on real hardware.
 241214 - Fixed init.s to work with real hardware.
