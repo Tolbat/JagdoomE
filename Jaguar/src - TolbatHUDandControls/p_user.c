@@ -552,7 +552,7 @@ static int toggle_weapon_1 = wp_pistol;    /* Toggle state for JP_1 */
 static int toggle_weapon_3 = wp_shotgun;  /* Toggle state for JP_3 */
 static int toggle_weapon_9 = wp_plasma;   /* Toggle state for JP_9 */
 static int toggle_weapon_star = wp_pistol; /* Toggle state for JP_STAR (all weapons forward) */
-static int toggle_weapon_hash = wp_pistol; /* Toggle state for JP_NUM (all weapons backward) */
+static int toggle_weapon_num = wp_pistol; /* Toggle state for JP_NUM (all weapons backward) */
 
     buttons = ticbuttons[playernum];
 
@@ -688,50 +688,161 @@ if (player->pendingweapon == wp_nochange)
         }
     }
 
-/* JP_STAR: Toggle forward through all weapons */
+/* JP_STAR: Toggle backward through all weapons */
 if (buttons & JP_STAR)
 {
+    int start_weapon = toggle_weapon_star; /* Store the starting point to prevent infinite loop */
+
     do
     {
-        toggle_weapon_star++;
-        if (toggle_weapon_star > wp_bfg) /* Wrap around to the first weapon */
-            toggle_weapon_star = wp_fist;
+        toggle_weapon_star--; /* Move backward */
+        if (toggle_weapon_star < wp_fist) /* Wrap around to the last weapon */
+            toggle_weapon_star = wp_bfg;
 
-    } while (!player->weaponowned[toggle_weapon_star] && toggle_weapon_star != wp_pistol);
+        /* Skip fist if chainsaw is owned */
+        if (toggle_weapon_star == wp_fist && player->weaponowned[wp_chainsaw])
+        {
+            toggle_weapon_star = wp_chainsaw;
+        }
+    } while (!player->weaponowned[toggle_weapon_star] && toggle_weapon_star != start_weapon);
 
-    /* Validate ownership explicitly before setting pendingweapon */
+    /* Set pendingweapon only if the weapon is owned */
     if (player->weaponowned[toggle_weapon_star])
     {
         player->pendingweapon = toggle_weapon_star;
     }
 }
 
-/* JP_NUM: Toggle backward through all weapons */
+/* JP_NUM: Toggle forward through all weapons */
 if (buttons & JP_NUM)
 {
-    do
-    {
-        toggle_weapon_hash--;
-        if (toggle_weapon_hash < wp_fist) /* Wrap around to the last weapon */
-            toggle_weapon_hash = wp_bfg;
+    /* Synchronize toggle_weapon_num with the current readyweapon */
+    toggle_weapon_num = player->readyweapon;
 
-    } while (!player->weaponowned[toggle_weapon_hash] && toggle_weapon_hash != wp_bfg);
-
-    /* Validate ownership explicitly before setting pendingweapon */
-    if (player->weaponowned[toggle_weapon_hash])
+    if (toggle_weapon_num == wp_fist)
     {
-        player->pendingweapon = toggle_weapon_hash;
+        if (player->weaponowned[wp_chainsaw])
+        {
+            toggle_weapon_num = wp_chainsaw;
+        }
+        else if (player->weaponowned[wp_pistol])
+        {
+            toggle_weapon_num = wp_pistol;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Default to fist if no other weapons are owned */
+        }
+    }
+    else if (toggle_weapon_num == wp_chainsaw)
+    {
+        if (player->weaponowned[wp_pistol])
+        {
+            toggle_weapon_num = wp_pistol;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Wrap back to fist */
+        }
+    }
+    else if (toggle_weapon_num == wp_pistol)
+    {
+        if (player->weaponowned[wp_shotgun])
+        {
+            toggle_weapon_num = wp_shotgun;
+        }
+        else if (player->weaponowned[wp_chaingun])
+        {
+            toggle_weapon_num = wp_chaingun;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Wrap back to fist */
+        }
+    }
+    else if (toggle_weapon_num == wp_shotgun)
+    {
+        if (player->weaponowned[wp_chaingun])
+        {
+            toggle_weapon_num = wp_chaingun;
+        }
+        else if (player->weaponowned[wp_missile])
+        {
+            toggle_weapon_num = wp_missile;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Wrap back to fist */
+        }
+    }
+    else if (toggle_weapon_num == wp_chaingun)
+    {
+        if (player->weaponowned[wp_missile])
+        {
+            toggle_weapon_num = wp_missile;
+        }
+        else if (player->weaponowned[wp_plasma])
+        {
+            toggle_weapon_num = wp_plasma;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Wrap back to fist */
+        }
+    }
+    else if (toggle_weapon_num == wp_missile)
+    {
+        if (player->weaponowned[wp_plasma])
+        {
+            toggle_weapon_num = wp_plasma;
+        }
+        else if (player->weaponowned[wp_bfg])
+        {
+            toggle_weapon_num = wp_bfg;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Wrap back to fist */
+        }
+    }
+    else if (toggle_weapon_num == wp_plasma)
+    {
+        if (player->weaponowned[wp_bfg])
+        {
+            toggle_weapon_num = wp_bfg;
+        }
+        else
+        {
+            toggle_weapon_num = wp_fist; /* Wrap back to fist */
+        }
+    }
+    else if (toggle_weapon_num == wp_bfg)
+    {
+        if (player->weaponowned[wp_fist])
+        {
+            toggle_weapon_num = wp_fist;
+        }
+        if (player->weaponowned[wp_chainsaw])
+        {
+            toggle_weapon_num = wp_chainsaw;
+        }
+    }
+
+    /* Validate ownership before setting pendingweapon */
+    if (player->weaponowned[toggle_weapon_num])
+    {
+        player->pendingweapon = toggle_weapon_num;
     }
 }
 
-    }
+/* Avoid unnecessary weapon change */
+if (player->pendingweapon == player->readyweapon)
+{
+    player->pendingweapon = wp_nochange;
+}
 
-    /* Avoid unnecessary weapon change */
-    if (player->pendingweapon == player->readyweapon)
-    {
-        player->pendingweapon = wp_nochange;
-    }
 
+}
 
 /* */
 /* check for use */

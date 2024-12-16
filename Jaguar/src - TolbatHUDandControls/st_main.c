@@ -287,50 +287,77 @@ void ST_Drawer(void)
         }
     }
 
-    /* */
-    /* Weapons & level */
-    /* */
-    if (netgame != gt_deathmatch)
+/* */
+/* Weapons & level */
+/* */
+if (netgame != gt_deathmatch)
+{
+    i = gamemap;
+    if (stbar.currentMap != i)
     {
-        i = gamemap;
-        if (stbar.currentMap != i)
-        {
-            int x = MAPX;
-            stbar.currentMap = i;
-            /* CENTER THE LEVEL # IF < 10 */
-            if (stbar.currentMap < 10)
-                x -= 6;
-            EraseBlock(MAPX - 30, MAPY, 30, 16);
-            ST_DrawValue(x, MAPY, i);
-        }
+        int x = MAPX;
+        stbar.currentMap = i;
+        /* CENTER THE LEVEL # IF < 10 */
+        if (stbar.currentMap < 10)
+            x -= 6;
+        EraseBlock(MAPX - 30, MAPY, 30, 16);
+        ST_DrawValue(x, MAPY, i);
+    }
 
-        /* Ensure weapon icons start correctly based on ownership */
+    /* Ensure weapon icons start correctly based on ownership */
+    for (ind = 0; ind < NUMMICROS; ind++)
+    {
+        if (p->weaponowned[ind + 1] != stbar.weaponowned[ind])
+        {
+            stbar.weaponowned[ind] = p->weaponowned[ind + 1];
+            if (stbar.weaponowned[ind])
+            {
+                DrawJagobj(micronums[ind], micronums_x[ind], micronums_y[ind]);
+            }
+            else
+            {
+                EraseBlock(micronums_x[ind], micronums_y[ind], 4, 6);
+            }
+        }
+    }
+
+    /* Validate readyweapon to ensure it is owned */
+    if (!p->weaponowned[p->readyweapon])
+    {
+        p->readyweapon = wp_pistol; /* Default to Pistol if invalid weapon is equipped */
+    }
+
+    /* Update weapon icons */
+    if (p->readyweapon == wp_fist || (p->weaponowned[wp_chainsaw] && p->readyweapon == wp_chainsaw))
+    {
+        /* In melee mode (fist or chainsaw), display all owned weapons */
         for (ind = 0; ind < NUMMICROS; ind++)
         {
-            if (p->weaponowned[ind + 1] != stbar.weaponowned[ind])
+            if (p->weaponowned[ind + 1])
             {
-                stbar.weaponowned[ind] = p->weaponowned[ind + 1];
-                if (stbar.weaponowned[ind])
+                /* Draw icons for all owned weapons */
+                if (!stbar.weaponowned[ind]) /* Avoid unnecessary redraws */
                 {
+                    stbar.weaponowned[ind] = true;
                     DrawJagobj(micronums[ind], micronums_x[ind], micronums_y[ind]);
                 }
-                else
+            }
+            else
+            {
+                /* Erase icons for unowned weapons */
+                if (stbar.weaponowned[ind])
                 {
+                    stbar.weaponowned[ind] = false;
                     EraseBlock(micronums_x[ind], micronums_y[ind], 4, 6);
                 }
             }
         }
-
-        /* Validate readyweapon to ensure it is owned */
-        if (!p->weaponowned[p->readyweapon])
-        {
-            p->readyweapon = wp_pistol; /* Default to Pistol if invalid weapon is equipped */
-        }
-
-        /* Update weapon icons based on equipped weapon */
+    }
+    else
+    {
+        /* Standard mode: Only highlight the equipped weapon */
         for (ind = 0; ind < NUMMICROS; ind++)
         {
-            /* Check if the current weapon is equipped AND owned */
             if (p->readyweapon == ind + 1 && p->weaponowned[ind + 1]) /* +1 to match weapon index */
             {
                 /* Draw the corresponding weapon icon */
@@ -351,6 +378,9 @@ void ST_Drawer(void)
             }
         }
     }
+}
+
+
     else /* Frag counts logic for deathmatch mode */
     {
         int yours;
