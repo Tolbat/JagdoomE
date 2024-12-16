@@ -224,18 +224,18 @@ Last Updated: 12-15-2024
 
 ---
 New Controls:
-JP_1  toggles pistol/fist
-JP_2  forward
-JP_3  toggles chaingun/shotgun
-JP_4  Strafe Left
-JP_5  backwards
-JP_6  Strafe Right
-JP_7  Rocket Launcher
-JP_8  Turn Player Around 180 degrees - 'about face'
-JP_9  toggles Plasma / BFG
-JP_*  toggles all weapons >
-JP_0  MAP
-JP_#  toggles weapons <
+JP_1 - toggles pistol/fist
+JP_2 - forward
+JP_3 - toggles chaingun/shotgun
+JP_4 - Strafe Left
+JP_5 - backwards
+JP_6 - Strafe Right
+JP_7 - Rocket Launcher
+JP_8 - Turn Player Around 180 degrees - 'about face'
+JP_9 - toggles Plasma / BFG
+JP_* - toggles all weapons >
+JP_0 - MAP
+JP_# - toggles weapons <
 
 HUD -  now displays Equipped weapons only unless in melee mode - shows weapons owned - in case player is stoned
 and cant remember what weapons they have.... :P
