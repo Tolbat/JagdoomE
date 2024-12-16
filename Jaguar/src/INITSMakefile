@@ -69,20 +69,20 @@ jagdoom : $(OFILES)
 #	rdbjag doom
 
 GAS2OBJ = mac -fb $?
-Cx2OBJ = gcc -x c++ -m68000 -Wall -DJAGUAR -O2 \
-        -I/jaguar/devkit/include -I/jaguar/devkit/Lib/3D/INCLUDE -c -o $@ $<
+Cx2OBJ = gcc -x c++ -m68000 -Wall -DJAGUAR -O2   -c -o $@ $<
+
 # C2OBJ = gcc263 -b m68k -Wall -DJAGUAR -O2 -c -o $@ $?
-C2OBJ = gcc -B/jaguar/devkit/bin/ -b m68k -V2.6 -Wall -DJAGUAR -O2 -v -c -o $@ $<
+C2OBJ = gcc -B/jaguar/devkit/bin/ -b m68k -V2.6 -Wall -DJAGUAR -O2 -c -o $@ $?
 
 
 
 #
 # 68k jaguar specific asm files
 #
-#init.o :init.s
+init.o :init.s
 #	cpp -DJAGUAR -DJAGPROFILE -lang-c++ -nostdinc $< $*.i
 #	as -mc68000  -o $@ $*.i
-#	$(GAS2OBJ)
+	$(GAS2OBJ)
 	
 lastobj.o :lastobj.s
 #	cpp -DJAGUAR -DJAGPROFILE -lang-c++ -nostdinc $< $*.i
@@ -276,7 +276,7 @@ clean:
 	del JagDoom.j64
 	del JagDoom1.j64
 	if exist C:\Jaguar\temp\*.* del C:\Jaguar\temp\*.*
-	copy /b init.sav init.o
+	#copy /b init.sav init.o
 	#disabled compile of init.s to use old init.sav
 
 	
@@ -288,7 +288,7 @@ clean:
 rom:
 	del C:\Jaguar\Temp\temp1.bin C:\Jaguar\Temp\temp2.bin C:\Jaguar\Temp\temp3.bin C:\Jaguar\Temp\JagDoom.j64
 	copy /b Univ.bin+boot.abs+doom.abs C:\Jaguar\Temp\temp1.bin
-	# Pause to run PadTempBin1 Py on your desktop - temp1.bin must be 256K
+	# Pause to run PadTempBin1 Py on your desktop cmd prompt - temp1.bin must be 256K
 	
 
 rom2:	
