@@ -239,7 +239,8 @@ JP_0 - MAP
 JP_# - toggles weapons <
 ```
 ```
-HUD -  now displays Equipped weapons only unless in melee mode - shows weapons owned - in case player is stoned
-and cant remember what weapons they have.... :P
+HUD -  now displays Equipped weapons only unless in melee mode - shows weapons owned - in case player is
+stoned and cant remember what weapons they have
+
 ```
 
