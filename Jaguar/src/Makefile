@@ -295,7 +295,7 @@ rom2:
 	copy /b C:\Jaguar\Temp\temp2.bin JagDoom.j64								   
 
 
-wad:
+#wad:
 	# Pause this is done via a python script on windows cmd see read me
 
 
@@ -305,7 +305,8 @@ wad:
 #	"C:\Jaguar\src\JagGD.exe" -u doom.wad,a:0x840000
 #	"C:\Jaguar\src\JagGD.exe" -x 0x2000
 
-	#USB NOT YET TESTED USE AT OWN RISK 
+	#USB NOT YET TESTED USE AT OWN RISK IN ANOTHER TERMINAL
 	#Need to compile jaggd.exe in Visual Studio or another compiler
-	#honestly its easier to just use linux at this point - may be added later but dont hold breath
+	#Find another terminal that works on Windows
+	#Recommended to do basic testing in BigPEmu and then Gamedrive via SD card
 	
