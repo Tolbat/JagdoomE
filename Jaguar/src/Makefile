@@ -296,4 +296,16 @@ rom2:
 
 
 wad:
-	# Pause this is done via a python script on windows cmd
+	# Pause this is done via a python script on windows cmd see read me
+
+
+#usb:
+#	"C:\Jaguar\src\JagGD.exe" -rd
+#	"C:\Jaguar\src\JagGD.exe" -u DOOM.ABS,a:0x2000
+#	"C:\Jaguar\src\JagGD.exe" -u doom.wad,a:0x840000
+#	"C:\Jaguar\src\JagGD.exe" -x 0x2000
+
+	#USB NOT YET TESTED USE AT OWN RISK 
+	#Need to compile jaggd.exe in Visual Studio or another compiler
+	#honestly its easier to just use linux at this point - may be added later but dont hold breath
+	
