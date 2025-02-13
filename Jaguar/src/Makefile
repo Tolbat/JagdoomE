@@ -281,7 +281,7 @@ clean:
 	
 	
 	
-	#WINDOWS COMPILE - pain in arse!
+	#WINDOWS COMPILE - pain in arse! PAY ATTENTION TO NOTES
 	
 	
 rom:
@@ -299,14 +299,10 @@ rom2:
 	# Pause this is done via a python script on windows cmd see read me
 
 
+#this is done in Cygwin terminal - No Emulator needed test directly on the Jaguar
 #usb:
-#	"C:\Jaguar\src\JagGD.exe" -rd
-#	"C:\Jaguar\src\JagGD.exe" -u DOOM.ABS,a:0x2000
-#	"C:\Jaguar\src\JagGD.exe" -u doom.wad,a:0x840000
-#	"C:\Jaguar\src\JagGD.exe" -x 0x2000
-
-	#USB NOT YET TESTED USE AT OWN RISK IN ANOTHER TERMINAL
-	#Need to compile jaggd.exe in Visual Studio or another compiler
-	#Find another terminal that works on Windows
-	#Recommended to do basic testing in BigPEmu and then Gamedrive via SD card
+	#/cygdrive/c/Jaguar/src/JagGD.exe -rd								resets Jaguar / Gamedrive
+	#/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000				loads ABS to address
+	#/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000			loads WAD to address
+	#/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000							loads the game at the address
 	
