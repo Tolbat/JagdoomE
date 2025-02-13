@@ -113,10 +113,10 @@ JagdoomT.j64
 #Now Test Directly on your Jaguar with Cygwin
 No Emulator needed test directly on the Jaguar
 usb:
-	/cygdrive/c/Jaguar/src/JagGD.exe -rd								        resets Jaguar / Gamedrive
-	/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000				loads ABS to address
-	/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000			loads WAD to address
-  /cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000						    	loads the game at the address
+/cygdrive/c/Jaguar/src/JagGD.exe -rd	resets Jaguar / Gamedrive
+/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000	loads ABS to address
+/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000		loads WAD to address
+/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000	loads the game at the address
 
 
 
