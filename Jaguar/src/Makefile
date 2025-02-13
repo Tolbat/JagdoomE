@@ -281,28 +281,42 @@ clean:
 	
 	
 	
-	#WINDOWS COMPILE - pain in arse! PAY ATTENTION TO NOTES
-	
+	#Cygwin COMPILE - open Cygwin terminal
+	cd C:/Jaguar/src
 	
 rom:
-	del C:\Jaguar\Temp\temp1.bin C:\Jaguar\Temp\temp2.bin C:\Jaguar\Temp\temp3.bin C:\Jaguar\Temp\JagDoom.j64
-	copy /b Univ.bin+boot.abs+doom.abs C:\Jaguar\Temp\temp1.bin
-	# Pause to run PadTempBin1 Py on your desktop cmd prompt - temp1.bin must be 256K
-	
+	# Clean up previous files
+	rm -f /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/Temp/temp3.bin /cygdrive/c/Jaguar/Temp/JagDoom.j64
 
-rom2:	
-	copy /b C:\Jaguar\Temp\temp1.bin+doom.wad C:\Jaguar\Temp\temp2.bin
-	copy /b C:\Jaguar\Temp\temp2.bin JagDoom.j64								   
+	# Copy files to Temp directory
+	cp /cygdrive/c/Jaguar/src/Univ.bin /cygdrive/c/Jaguar/Temp/
+	cp /cygdrive/c/Jaguar/src/boot.abs /cygdrive/c/Jaguar/Temp/
+	cp /cygdrive/c/Jaguar/src/doom.abs /cygdrive/c/Jaguar/Temp/
+
+	# Combine the files into temp1.bin
+	cmd.exe /c "copy /b C:\\Jaguar\\src\\Univ.bin+C:\\Jaguar\\src\\boot.abs+C:\\Jaguar\\src\\doom.abs C:\\Jaguar\\Temp\\temp1.bin"
+
+	# Combine temp1.bin with doom.wad to make temp2.bin
+	cmd.exe /c "copy /b C:\\Jaguar\\Temp\\temp1.bin+C:\\Jaguar\\src\\doom.wad C:\\Jaguar\\Temp\\temp2.bin"
+
+	# Pad temp2.bin to 256KB (if necessary)
+	cmd.exe /c "C:/Users/arod_/AppData/Local/Microsoft/WindowsApps/python.exe C:/Jaguar/PadTheTempBins/PadTempBin1.py C:/Jaguar/Temp/temp2.bin"
+
+
+
+rom2:
+	# Combine temp1.bin and doom.wad into temp2.bin
+	cat /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/src/doom.wad > /cygdrive/c/Jaguar/Temp/temp2.bin
+	# Copy temp2.bin to JagDoom.j64
+	cp /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/src/JagDoomEX.j64
+
+
+usb:
+	/cygdrive/c/Jaguar/src/JagGD.exe -rd
+	/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000
+	/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000
+	/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000
 
 
 #wad:
 	# Pause this is done via a python script on windows cmd see read me
-
-
-#this is done in Cygwin terminal - No Emulator needed test directly on the Jaguar
-#usb:
-	#/cygdrive/c/Jaguar/src/JagGD.exe -rd								resets Jaguar / Gamedrive
-	#/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000				loads ABS to address
-	#/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000			loads WAD to address
-	#/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000							loads the game at the address
-	
