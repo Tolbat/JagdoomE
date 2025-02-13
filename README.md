@@ -18,7 +18,7 @@ GetTheWad.py - provided by Tolbat
 
 PadTempBin1.py - provided by Tolbat
 
-Cygwin - optional
+Cygwin - now required - use Makefile1 for old build
 
 Open Jaggd.exe - optional
 
@@ -50,30 +50,37 @@ setpath
 You should now see the prompt change to C:\Jaguar\Src
 
 
-STEP 1
-First we need to prep the build enviroment.  Lets clean it and prep init.sav to become init.o
+
+## STEP 1
+
+
+First we need to prep the build enviroment.  Lets clean it!
 
 ```
 make clean
 ```
 
 
-STEP 2
-#TO BUILD THE DOOM GAME FOR JAGUAR # must start by creating doom.abs
+
+## STEP 2
+
+TO BUILD THE DOOM GAME FOR JAGUAR # must start by creating doom.abs
 
 ```
-make jagdoom
+make
 ```
 
-Note: In WINDOWS ONLY DosBox runs out of table memory when moving the temp files around.
+```
+Note: 
+In WINDOWS ONLY DosBox runs out of table memory when moving the temp files around.
 DosBox and DosBoxX will both crash with a warning that says "Not Enough Memory for Internal Tables".
 Reopen DosBox and use make jagdoom command again, do this until it spits out #doom.abs
 From the beginning of the process if you open DosBox and do make clean, then make it should only crash once, and does NOT effect the compile process.
-
 Now that you have doom.abs we can continue.
+```
 
 
-STEP 3
+## STEP 3
 
 ```
 make boot 
@@ -83,40 +90,40 @@ creates needed bootfiles
 boot.abs
 
 
-STEP 4
+
+## STEP 4  Open Cygwin Terminal 
+
+set path
+
+cd C:/Jaguar/src
 
 ```
 make rom:
 ```
 
-This merges the boot.abs and doom.abs, after this we need to pad it to 256k
-Linux does not do the padding outside of make!
+This merges the boot.abs and doom.abs, after it pads it to 256k.  No more extra steps to pad the files.
 
 
-STEP 5
 
-Open the cmd prompt on your windows 10 environment - NOT DosBox and change directory to:  C:\jaguar\PadTheTempBins
-Run PadTempBin1.py
-This pads the temp1.bin to 256k in rom format
-
-
-STEP 6
+## STEP 5 - in Cygwin
 
 ```
 make rom2:
 ```
 
 merges the padded rom with the doom.wad file.
-creates the rom
-JagdoomT.j64
+creates the rom JagDoomEX.j64
+
 ```
 #Now Test Directly on your Jaguar with Cygwin
 No Emulator needed test directly on the Jaguar
+
 usb:
 /cygdrive/c/Jaguar/src/JagGD.exe -rd	resets Jaguar / Gamedrive
 /cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000	loads ABS to address
 /cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000		loads WAD to address
 /cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000	loads the game at the address
+
 ```
 
 
@@ -125,6 +132,7 @@ usb:
 ## New Controls
 
 Subject to change:
+
 C/B/A/PAUSE/OPTION remain as set in the game. The differences arise in the
 number pad, which also affects the ProPad controller.
 ```
@@ -204,7 +212,7 @@ pause
 
 ---
 
-## Alt src folder added  src - TolbatHUDandControls
+## Alt src folder added  src - TolbatHUDandControls - may need fine tuning with newer code
 
 ---
 Just my testing junk - use at own risk!
@@ -215,7 +223,7 @@ not updated with current code
 
 ## Changelog
 
-For Up to date Src folder please visit the Linux GitHub page: 
+If a known feature is missing please visit the Linux GitHub page: 
 ```
 https://github.com/ChillyWillyGuru/JagDoomEX/
 
@@ -228,16 +236,20 @@ https://github.com/ChillyWillyGuru/JagDoomEX/
 241209 - Fixed the spectre - now in Super Ghostly Phantasmagoric™ rendering.
 241209 - Remapped the controls to allow for the ProPad.
 
-Last Updated: 2/12/2025
+
 250212 - CRT Widescreen, Improved HUD with ammo color states
 250212 - Jaggd.exe Support for windows 10 via Cygwin
+
+Last Updated: 2/13/2025
+250213 - Cygwin now required, building the rom is now comparable to linux.  Still has memory crash issue.  Testing a fix - no promises.
+If you do not want to use Cygwin please use Makefile1 and rename to makefile it cannot be makefile.mak
 
 ```
 
 
-## Alt Tolbat src Changelog and info
+## Alt Tolbat
 
-
+This is no longer being tested as of 2/1/2025
 New Controls:
 ```
 JP_1 - toggles pistol/fist
