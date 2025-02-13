@@ -124,6 +124,7 @@ usb:
 
 ## New Controls
 
+Subject to change:
 C/B/A/PAUSE/OPTION remain as set in the game. The differences arise in the
 number pad, which also affects the ProPad controller.
 ```
@@ -182,14 +183,10 @@ To the entire Jaguar Community that like me are forced to live in silence!
 
 ## Known Bugs
 
-The init.s file needs some work. It didn't work as it came from Carl. ChillyWilluGuru made
-some changes that get it working in BigPEmu, but it doesn't work on a real
-console - yet. Chilly will work on it until it does, but until then, we use Carl's
-workaround to handle the initialization code.
-
 The network code is still as it was - kinda buggy. Chilly doesn't know if or when he
 will get to it. He only has one Jaguar, and the JagGD cart is not compatible
 with JagLink in any case.
+No in game music
 
 ## TIME SAVER for DOSBox
 
@@ -212,6 +209,7 @@ pause
 ---
 Just my testing junk - use at own risk!
 src - TolbatHUDandControls
+not updated with current code
 
 ---
 
