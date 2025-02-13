@@ -18,6 +18,10 @@ GetTheWad.py - provided by Tolbat
 
 PadTempBin1.py - provided by Tolbat
 
+Cygwin - optional
+
+Open Jaggd.exe - optional
+
 ## Creating your Doom IWAD file
 Assuming you don't already have the wad file for the game, but you DO have the original
 Jaguar Doom rom image (not provided!), copy the Jaguar Doom rom image into the
@@ -208,7 +212,7 @@ For Up to date Src folder please visit the Linux GitHub page:
 ```
 https://github.com/ChillyWillyGuru/JagDoomEX/
 
-Last Updated: 12-15-2024
+12-15-2024
 241215 - Revert Init.s to use old init.o - not fixed per Chilly 
 241215 - Fixed sprites sometimes visible thru walls bug.
 241215 - Fixed transparent spectres on real hardware.
@@ -216,6 +220,10 @@ Last Updated: 12-15-2024
 241210 - First commit to repo.
 241209 - Fixed the spectre - now in Super Ghostly Phantasmagoric™ rendering.
 241209 - Remapped the controls to allow for the ProPad.
+
+Last Updated: 2/12/2025
+250212 - CRT Widescreen, Improved HUD with ammo color states
+250212 - Jaggd.exe Support for windows 10 via Cygwin
 
 ```
 
