@@ -103,16 +103,10 @@ make rom:
 
 This merges the boot.abs and doom.abs, after it pads it to 256k.  No more extra steps to pad the files.
 
+then merges the padded rom with the doom.wad file.
 
+creates the rom JagDoomEX.j64 
 
-## STEP 5 - in Cygwin
-
-```
-make rom2:
-```
-
-merges the padded rom with the doom.wad file.
-creates the rom JagDoomEX.j64
 
 ```
 #Now Test Directly on your Jaguar with Cygwin
@@ -132,6 +126,7 @@ usb:
 ## New Controls
 
 Subject to change:
+
 
 C/B/A/PAUSE/OPTION remain as set in the game. The differences arise in the
 number pad, which also affects the ProPad controller.
@@ -168,12 +163,14 @@ The pad controller goes into port 1. When mouse support is done, it will plug
 into port 2. You will need an Atari ST or Amiga mouse with appropriate adapter,
 or a PS/2 mouse with appropriate adapter for upcoming mouse support.
 
+
 ## Additional Tools for later
 getthehex2v1  - finds the iwad offset and updates jagonly.c
 
 getthehex3v1  - finds the iwad offset and updates jagonly.c and boot.s
 
 Note - These may be useless but they can find the WAD file if for some reason its smaller, may need more work to logic.
+
 
 ## Acknowledgements
 ```
@@ -194,9 +191,11 @@ To the entire Jaguar Community that like me are forced to live in silence!
 The network code is still as it was - kinda buggy. Chilly doesn't know if or when he
 will get to it. He only has one Jaguar, and the JagGD cart is not compatible
 with JagLink in any case.
+
 No in game music
 
-## TIME SAVER for DOSBox
+
+## TIME SAVER for DOSBox or DosBoxX
 
 Insert the following into the [autoexec] portion of the dosbox-0.74-3.conf file - this speeds 
 things up.
