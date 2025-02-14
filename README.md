@@ -121,7 +121,18 @@ usb:
 ```
 
 
+## New Features
+You can select widescreen on/off in the Options menu. This makes Doom look the proper aspect ratio on 16:9 TVs. 
+Off assumes a standard 4:3 TV. 
+Defaults to off, and is saved in the e2prom.
 
+Arms indicators so that they show the proper keypad number. 
+Added colors to indicate some status info. 
+GREEN if the weapon is equipped, 
+BLUE if the required ammo is more than half the max allowed count (with or without the backpack),
+YELLOW if the required ammo is less than half the max allowed count,
+and RED if the weapon is out of ammo. At a glance, you get vital information. 
+This can be made an option if people prefer not having colored indicators. 
 
 ## New Controls
 
@@ -164,13 +175,6 @@ into port 2. You will need an Atari ST or Amiga mouse with appropriate adapter,
 or a PS/2 mouse with appropriate adapter for upcoming mouse support.
 
 
-## Additional Tools for later
-getthehex2v1  - finds the iwad offset and updates jagonly.c
-
-getthehex3v1  - finds the iwad offset and updates jagonly.c and boot.s
-
-Note - These may be useless but they can find the WAD file if for some reason its smaller, may need more work to logic.
-
 
 ## Acknowledgements
 ```
@@ -198,7 +202,7 @@ No in game music
 ## TIME SAVER for DOSBox or DosBoxX
 
 Insert the following into the [autoexec] portion of the dosbox-0.74-3.conf file - this speeds 
-things up.
+things up.  or the DOSboxX config file.
 
 ---
 MOUNT C C:\
@@ -219,6 +223,14 @@ src - TolbatHUDandControls
 not updated with current code
 
 ---
+
+## Additional Tools for later
+getthehex2v1  - finds the iwad offset and updates jagonly.c
+
+getthehex3v1  - finds the iwad offset and updates jagonly.c and boot.s
+
+Note - These may be useless but they can find the WAD file if for some reason its smaller, may need more work to logic.
+
 
 ## Changelog
 
@@ -248,8 +260,8 @@ If you do not want to use Cygwin please use Makefile1 and rename to makefile it 
 
 ## Alt Tolbat
 
-This is no longer being tested as of 2/1/2025
-New Controls:
+This is no longer being tested as of 2/1/2025 can be used to go back later
+Tolbat Controls:
 ```
 JP_1 - toggles pistol/fist
 JP_2 - forward
@@ -265,8 +277,8 @@ JP_0 - MAP
 JP_# - toggles weapons <
 ```
 ```
-HUD -  now displays Equipped weapons only unless in melee mode - shows weapons owned - in case player is
-stoned and cant remember what weapons they have
+Tolbat HUD -  Now displays Equipped weapons only unless in melee mode - shows weapons owned - in case player is
+stoned and cant remember what weapons they have :)
 
 ```
 
