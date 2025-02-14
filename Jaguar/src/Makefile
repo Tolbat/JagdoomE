@@ -259,7 +259,7 @@ music.o : music.gas
 
 
 
-
+	#Make and Make boot are run in DOSBox
 
 
 boot:
@@ -281,34 +281,17 @@ clean:
 	
 	
 	
-	#Cygwin COMPILE - open Cygwin terminal
-	cd C:/Jaguar/src
+	#Cygwin COMPILE - open Cygwin terminal - make rom and make rom2 are now done in Cygwin
+	#cd C:/Jaguar/src
 	
 rom:
-	# Clean up previous files
-	rm -f /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/Temp/temp3.bin /cygdrive/c/Jaguar/Temp/JagDoom.j64
+	rm -f /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/Temp/temp3.bin /cygdrive/c/Jaguar/Temp/JagDoomEX.j64
+	cat /cygdrive/c/Jaguar/src/Univ.bin /cygdrive/c/Jaguar/src/boot.abs /cygdrive/c/Jaguar/src/doom.abs > /cygdrive/c/Jaguar/Temp/temp1.bin
+	dd if=/cygdrive/c/Jaguar/Temp/temp1.bin of=/cygdrive/c/Jaguar/Temp/temp2.bin bs=256K conv=sync
+	cat /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/src/doom.wad > /cygdrive/c/Jaguar/Temp/temp3.bin
+	dd if=/cygdrive/c/Jaguar/Temp/temp3.bin of=/cygdrive/c/Jaguar/Temp/JagDoomEX.j64 bs=4096K conv=sync
+	mv /cygdrive/c/Jaguar/Temp/JagDoomEX.j64 /cygdrive/c/Jaguar/src/
 
-	# Copy files to Temp directory
-	cp /cygdrive/c/Jaguar/src/Univ.bin /cygdrive/c/Jaguar/Temp/
-	cp /cygdrive/c/Jaguar/src/boot.abs /cygdrive/c/Jaguar/Temp/
-	cp /cygdrive/c/Jaguar/src/doom.abs /cygdrive/c/Jaguar/Temp/
-
-	# Combine the files into temp1.bin
-	cmd.exe /c "copy /b C:\\Jaguar\\src\\Univ.bin+C:\\Jaguar\\src\\boot.abs+C:\\Jaguar\\src\\doom.abs C:\\Jaguar\\Temp\\temp1.bin"
-
-	# Combine temp1.bin with doom.wad to make temp2.bin
-	cmd.exe /c "copy /b C:\\Jaguar\\Temp\\temp1.bin+C:\\Jaguar\\src\\doom.wad C:\\Jaguar\\Temp\\temp2.bin"
-
-	# Pad temp2.bin to 256KB (if necessary)
-	cmd.exe /c "C:/Users/arod_/AppData/Local/Microsoft/WindowsApps/python.exe C:/Jaguar/PadTheTempBins/PadTempBin1.py C:/Jaguar/Temp/temp2.bin"
-
-
-
-rom2:
-	# Combine temp1.bin and doom.wad into temp2.bin
-	cat /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/src/doom.wad > /cygdrive/c/Jaguar/Temp/temp2.bin
-	# Copy temp2.bin to JagDoom.j64
-	cp /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/src/JagDoomEX.j64
 
 
 usb:
