@@ -9,6 +9,8 @@ PadTheTempBins
 src
 Temp
 
+# change name of current makefile in src folder and rename makefileOld to makefile.
+
 # These folders are all crucial to the Windows enviroment.
 # If you are using Linux the files needed for your enviroment are provided.
 # Instructions are similar but way less cumbersome.  
