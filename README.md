@@ -56,7 +56,7 @@ You can then create the wad file by running GetTheWad.py it will then be placed 
 Now you have your wad file!
 
 
-
+## Compiling Doom
 In this example we will use the root windows directory C:\  
 You may use any drive you wish but you will need to update all the different filepaths yourself.
 
