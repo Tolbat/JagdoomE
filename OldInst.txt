@@ -1,0 +1,114 @@
+# Rename setpath.txt to setpath.bat and place setpath.bat in the root of C:
+# Place the Jaguar folder in the root of C:\ 
+# Place setpath.bat in the root of C:\ - take a look at its contents, you may #want to use a different drive. 
+
+
+# In the Root of C:\Jaguar if not already there place the following folders:
+devkit
+PadTheTempBins
+src
+Temp
+
+# These folders are all crucial to the Windows enviroment.
+# If you are using Linux the files needed for your enviroment are provided.
+# Instructions are similar but way less cumbersome.  
+
+Install Python if you dont have it.
+Install DoSBox 74-3 - the VERSION WE INCLUDED :-)
+
+DosBox Instructions:
+type the following:
+
+mount C C:\
+
+C C:\
+
+setpath
+
+STEP 1
+make clean
+#cleans folders and preps init.o since we are still using init.sav to init.o
+
+STEP 2
+#TO BUILD THE DOOM GAME FOR JAGUAR # must start by creating doom.abs
+
+make jagdoom   		(or just)   make     as its first on the list.
+
+# compiles the doom.abs
+# Note:  In WINDOWS ONLY DosBox runs out of table memory when #moving the #temp files around.
+# DosBox and DosBoxX will both crash with a warning that says "Not Enough #Memory for Internal Tables".
+# Reopen DosBox and use make command again, do this until it spits out #doom.abs
+# From the beginning of the process if you open DosBox and do make clean, #then make it should only crash once, and does NOT effect the compile #process.
+
+
+STEP 3
+
+make boot 
+
+#creates needed bootfiles
+boot.abs
+
+	
+STEP 4
+	
+make rom:
+
+#this merges the boot.abs and doom.abs, after this we need to pad it to 256k - 
+#Linux does not do the padding outside of make!
+
+	del C:\Jaguar\Temp\temp1.bin C:\Jaguar\Temp\temp2.bin C:\Jaguar\Temp\temp3.bin C:\Jaguar\Temp\JagDoomT.j64
+	copy /b Univ.bin+boot.abs+doom.abs C:\Jaguar\Temp\temp1.bin
+
+# Pause to run C:\jaguar\PadTheTempBins\PadTempBin1 Py on your desktop in cmd
+# run PadTempBin1 on desktop cmd - this pads the temp1.bin to 256k in rom format
+# DO NOT RUN PatTempBin2 
+
+
+STEP 5
+
+make rom2:
+
+#merges the padded rom with the doom.wad file.
+	
+	copy /b C:\Jaguar\Temp\temp1.bin+doom.wad C:\Jaguar\Temp\temp2.bin
+	copy /b C:\Jaguar\Temp\temp2.bin JagDoomT.j64	
+
+#creates the rom
+JagdoomT.j64
+
+
+
+
+
+
+
+#Put Rom on GameDrive or in Emulator and play with your learning!
+
+
+
+
+
+Tools Provided:
+
+getthehex2v1.py and 3v1(not needed yet)
+place the rom in a folder with this script, update the paths at the top with notepad or notepad++
+Example:
+DOOM_BIN_PATH = r"C:\GetTheHex\JAGDOOME.J64"  # Path to the binary file to search for the IWAD marker
+JAGONLY_C_PATH = r"C:\GetTheHex\jagonly.c"    # Path to the source code file (jagonly.c) to update
+Version 3v1 updates boot.s in the event the doom.abs exceeds 256KB
+if it does, the padding files will need changed as well.  current filesize is 245KB
+run the py in cmd - make sure you have python installed.
+This will show you all three IWAD offsets
+Make needed adjustments for jagonly.c, and also update jagonly.c if you move it into the same folder or map it to the directory you want update.  
+
+python 
+for 64 bit windows
+
+DoSBox 74-3 and old Jagdev102.exe
+provided as well.  If you install jagdev.exe it will install folder and files on C:\Jaguar
+Delete whats in C:Jaguar and put this enviroment in its place.
+
+rename setpath.txt
+setpath.bat
+Place this file in the root of your C:\ drive.
+

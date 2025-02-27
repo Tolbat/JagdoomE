@@ -1,6 +1,7 @@
 # Doom for the Atari Jaguar - Extended Edition JagdoomE
 
-This project allows you to build Doom for the Atari Jaguar in Windows 10. It uses the latest toolchain released by Atari which was put into the Public Domain. You can read about the Jaguar saga elsewhere - we're just concerned with Doom. 
+This project allows you to build Doom for the Atari Jaguar in Windows 10. It uses old toolchain released by Atari which was put into the Public Domain. 
+You can read about the Jaguar saga elsewhere - we're just concerned with Doom. 
 We can thank Carl Forhan from Songbird Productions for that. 
 He talked Carmack into releasing the Jaguar source, then played with it enough to get it to work on real hardware, then released the source for others to play with.
 
@@ -9,18 +10,43 @@ Began using the work Saturn posted back in 2015, and then luckily got the assist
 It fell on the Green Lizard to revive the old Windows DOS build.  It presented some limitations.  
 While it is easier and takes less steps in Linux, Windows is quite capable of producing a rom.  The biggest issue is DoxBox and how it manages table memory.
 
+
 ## Additional Tools Required for Windows
-DosBox 74-3
 
-Python for windows
 
-GetTheWad.py - provided by Tolbat
+1 - DosBox 74-3
 
-PadTempBin1.py - provided by Tolbat
 
-Cygwin - now required - use Makefile1 for old build
+2 - Python for windows
 
-Open Jaggd.exe - optional
+
+3 - GetTheWad.py - provided by Tolbat
+
+
+4 - PadTempBin1.py - old method provided by Tolbat
+
+
+5 - Cygwin - now required - use OldMakefile for old build
+
+	Please download Cygwin for windows with the following ADD ONS:
+	gcc-core → Select for installation (C Compiler)
+	gcc-g++ → Select for installation (C++ Compiler)
+	make → Select for installation
+	git → (Optional, if you want to clone repositories)
+
+	Once installed verify the version in Cygwin
+	gcc --version
+	g++ --version
+	make --version
+	git --version
+
+
+6 - Open Jaggd.exe - optional
+
+	Before beginning please download the Open Jaguar GD source and compile the jaggd.exe and ensure it is placed in C:/Jaguar/src
+	https://github.com/cubanismo/open_jaggd
+	Special thanks to James Jones aka cubanismo## Setting up the Enviroment:
+
 
 ## Creating your Doom IWAD file
 Assuming you don't already have the wad file for the game, but you DO have the original
@@ -29,12 +55,13 @@ C:\jaguar\GetMyWad directory, and make sure it's named "Doom.j64".
 You can then create the wad file by running GetTheWad.py it will then be placed in C:\jaguar\src
 Now you have your wad file!
 
-## Setting up the Enviroment:
+
+
 In this example we will use the root windows directory C:\  
 You may use any drive you wish but you will need to update all the different filepaths yourself.
 
 Place the Jaguar folder in the root of C:\
-Place setpath.bat in the root of C:\
+Rename setpath.txt to setpath.bat and place setpath.bat in the root of C:\
 open DosBox 74-3 and type 
 
 ```
@@ -112,11 +139,21 @@ creates the rom JagDoomEX.j64
 #Now Test Directly on your Jaguar with Cygwin
 No Emulator needed test directly on the Jaguar
 
+Compile Doom.abs only using the original method and ensure it is in the src folder.
+Ensure Doom.wad is in the src folder.
+
+Power on your Jaguar
+Connect the Gamedrive to a USB port on your computer (ensure the cable is a data cable)
+Wait for the USB to be detected and installed
+
+Load Cygwin
+cd /cygdrive/c/Jaguar/src					this puts you in the correct directory if it matches mine
+
 usb:
-/cygdrive/c/Jaguar/src/JagGD.exe -rd	resets Jaguar / Gamedrive
-/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000	loads ABS to address
+/cygdrive/c/Jaguar/src/JagGD.exe -rd						resets Jaguar / Gamedrive
+/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000		loads ABS to address
 /cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000		loads WAD to address
-/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000	loads the game at the address
+/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000					loads the game at the address
 
 ```
 
@@ -179,22 +216,16 @@ or a PS/2 mouse with appropriate adapter for upcoming mouse support.
 ## Acknowledgements
 ```
 John Carmack for writing such an awesome game, and releasing it to the public.
-Carl Forhan for arranging the code, and doing the initial work to get it
-running.
-CyranoJ for fixing the offset in the HUD in the code released by Carl.
+Carl Forhan for providing and arranging the code release
 Saturn for his work on the Windows build back in the days of Skunk.
-ChillyWillyGuru for providing the cleaner Linux build, makefile, new controls,
-and his improvements.
-JagChris for organizing and planning
-Atari Age for providing the original source code online
-To the entire Jaguar Community that like me are forced to live in silence!
+ChillyWillyGuru for providing the cleaner Linux build, makefile, new controls, and his ongoing improvements.
+A31Chris for organizing and planning
+To the many silenced Jaguar owners!
 ```
 
 ## Known Bugs
 
-The network code is still as it was - kinda buggy. Chilly doesn't know if or when he
-will get to it. He only has one Jaguar, and the JagGD cart is not compatible
-with JagLink in any case.
+The network code still has bugs
 
 No in game music
 
@@ -204,7 +235,7 @@ No in game music
 Insert the following into the [autoexec] portion of the dosbox-0.74-3.conf file - this speeds 
 things up.  or the DOSboxX config file.
 
----
+```
 MOUNT C C:\
 
 C:
@@ -213,7 +244,7 @@ setpath
 
 pause
 
----
+```
 
 ## Alt src folder added  src - TolbatHUDandControls - may need fine tuning with newer code
 
@@ -250,10 +281,10 @@ https://github.com/ChillyWillyGuru/JagDoomEX/
 
 250212 - CRT Widescreen, Improved HUD with ammo color states
 250212 - Jaggd.exe Support for windows 10 via Cygwin
-
-Last Updated: 2/13/2025
 250213 - Cygwin now required, building the rom is now comparable to linux.  Still has memory crash issue.  Testing a fix - no promises.
-If you do not want to use Cygwin please use Makefile1 and rename to makefile it cannot be makefile.mak
+			If you do not want to use Cygwin please use OldMakefile and rename to makefile it cannot be makefile.mak.  
+			Please follow OldInst.txt
+250226 - Corrected mistakes to setup
 
 ```
 
