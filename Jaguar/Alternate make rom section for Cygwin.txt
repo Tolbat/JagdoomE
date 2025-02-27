@@ -1,0 +1,23 @@
+rom:
+	rm -f $(shell cygpath -u 'C:\Jaguar\Temp\temp1.bin') \
+	      $(shell cygpath -u 'C:\Jaguar\Temp\temp2.bin') \
+	      $(shell cygpath -u 'C:\Jaguar\Temp\temp3.bin') \
+	      $(shell cygpath -u 'C:\Jaguar\Temp\JagDoomEX.j64')
+
+	cat $(shell cygpath -u 'C:\Jaguar\src\Univ.bin') \
+	    $(shell cygpath -u 'C:\Jaguar\src\boot.abs') \
+	    $(shell cygpath -u 'C:\Jaguar\src\doom.abs') > $(shell cygpath -u 'C:\Jaguar\Temp\temp1.bin')
+
+	dd if=$(shell cygpath -u 'C:\Jaguar\Temp\temp1.bin') \
+	   of=$(shell cygpath -u 'C:\Jaguar\Temp\temp2.bin') \
+	   bs=256K conv=sync
+
+	cat $(shell cygpath -u 'C:\Jaguar\Temp\temp2.bin') \
+	    $(shell cygpath -u 'C:\Jaguar\src\doom.wad') > $(shell cygpath -u 'C:\Jaguar\Temp\temp3.bin')
+
+	dd if=$(shell cygpath -u 'C:\Jaguar\Temp\temp3.bin') \
+	   of=$(shell cygpath -u 'C:\Jaguar\Temp\JagDoomEX.j64') \
+	   bs=4096K conv=sync
+
+	mv $(shell cygpath -u 'C:\Jaguar\Temp\JagDoomEX.j64') \
+	   $(shell cygpath -u 'C:\Jaguar\src\')
