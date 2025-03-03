@@ -120,9 +120,7 @@ boot.abs
 
 ## STEP 4  Open Cygwin Terminal 
 
-set path
-
-cd C:/Jaguar/src
+cd /cygdrive/c/Jaguar/src
 
 ```
 make rom:
