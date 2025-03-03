@@ -117,6 +117,8 @@ creates needed bootfiles
 boot.abs
 
 
+STOP HERE - Make sure doom.abs, boot.abs, and doom.wad are all located in C:\jaguar\src
+
 
 ## STEP 4  Open Cygwin Terminal 
 
