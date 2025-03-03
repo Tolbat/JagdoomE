@@ -282,7 +282,7 @@ clean:
 	
 	
 	#Cygwin COMPILE - open Cygwin terminal - make rom and make rom2 are now done in Cygwin
-	#cd C:/Jaguar/src
+	#cd /cygdrive/c/Jaguar/src
 	
 rom:
 	rm -f /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/Temp/temp3.bin /cygdrive/c/Jaguar/Temp/JagDoomEX.j64
