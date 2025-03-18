@@ -1,15 +1,20 @@
-# Doom for the Atari Jaguar - Extended Edition JagdoomE
+# Doom for the Atari Jaguar - Jaguar Doom Evolved (JagdoomE)
 
-This project allows you to build Doom for the Atari Jaguar in Windows 10. It uses old toolchain released by Atari which was put into the Public Domain. 
-You can read about the Jaguar saga elsewhere - we're just concerned with Doom. 
-We can thank Carl Forhan from Songbird Productions for that. 
-He talked Carmack into releasing the Jaguar source, then played with it enough to get it to work on real hardware, then released the source for others to play with.
+Now with Functional in game music.  Works Perfectly on BigPEmu, and very good on real console, there is some slowdown currently but that is being worked on.
 
-Having never worked on Doom for any platform, I decided after waiting for an eternity, to give it a try.  
-Began using the work Saturn posted back in 2015, and then luckily got the assistance of ChillyWillyGuru.
-It fell on the Green Lizard to revive the old Windows DOS build.  It presented some limitations.  
-While it is easier and takes less steps in Linux, Windows is quite capable of producing a rom.  The biggest issue is DoxBox and how it manages table memory.
+This project allows you to build Doom for the Atari Jaguar in Windows 10. It uses old toolchain released by Atari which was put into the Public Domain.  
+We can thank Carl Forhan from Songbird Productions for talking to John Carmack and getting the source code released. 
+Then Carl worked with it enough to get it to work on real hardware, then released the source for others to play with.
+Time went on, systems were updated... 
 
+Having never worked on Doom for any platform, I decided after waiting for an eternity for music in Doom, to give it a try.  
+I began using the work Saturn posted on some different forums back in 2015.  Somewhere along the way Chilly, a lead developer from the Doom 32x Fusion project who also loves the Atari Jaguar gave me some much needed help.  Even so, Chilly used Linux, and I windows.  
+So it fell on the me to revive the old Windows DOS build.  It presented some limitations at first but its quite robust now.  Featuring GameDrive testing directly to the console.
+
+About a week ago (today is 3/18/2025), I decided to work on getting music running for a vanilla Jaguar Doom for the community.  After working on this for a while, I was able to get sound working in the demo loop but with issues (see my YouTube channel).  While this started as a side project to attempt this, when I got close, I shared what I had with Chilly of JagdoomEx.  Chilly was able to identify issues in the sfx.gas file that caused mixing issues with music playing.  He was kind enough to help me update my existing code base, and also get the correct music in the levels.  One difference to note is Chilly left the intermission music in place, while I removed it and have left it to play the into music (not on a loop).  Late yesterday a bug was discovered that crashed the game at level 10, this is fixed in this version.  Also note, this versions sfx.gas is different than the one in JagDoomEx github.  I devised a slightly faster way to mix in the sound effects.  It is with great pleasure, honor, and little me joy to introduce you all to Doom for Atari Jaguar with Music, and Sound.  May God have mercy on you all.  This project started in November of 2024, and has been worked on sporadically by Chilly WIlly, and Tolbat.  This code is free to use, but do not be a dick and give people the credit they deserve if you use it.
+
+NOTE: As of 3/18/2025 this code may or may not match JagDoomEx, if you want a pure JagdoomEx on windows, just download the github and delete the makefile, 
+and use the makefile from this one.  Currently there are some things I want to do on my own that will be more for the standard game which may not go hand in hand with porting Doom Fusion to the Jaguar.  Hence the projects new name "Jaguar Doom Evolved".
 
 ## Additional Tools Required for Windows
 
@@ -227,7 +232,7 @@ To the many silenced Jaguar owners!
 
 The network code still has bugs
 
-No in game music
+In game music causes some slowdown.
 
 
 ## TIME SAVER for DOSBox or DosBoxX
