@@ -1,0 +1,6 @@
+this code has bad sound effects, however it does allow for music and volume sound changes.
+
+As they are currently linked in the options menu with current code - 3-18-2025 - using the optional volume scroll in the options screen will crash the game when added together.
+Once separated this may be one way to control music volume in game.  It worked when tested with Chilly's code otherwise.
+
+Note this is not a drop and go or copy and paste solution, you need to know a little about whats what here before trying it.
