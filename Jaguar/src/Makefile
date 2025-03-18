@@ -64,6 +64,7 @@ z_zone.o \
 sfx.o	\
 music.o
 
+	#DOSBox or DOSBoxX
 jagdoom : $(OFILES)
 	aln -c mydoom.lnk 
 #	rdbjag doom
@@ -258,22 +259,20 @@ music.o : music.gas
 
 
 
-
+	#DOSBox or DOSBoxX
 	#Make and Make boot are run in DOSBox
-
-
 boot:
 	$(GAS2OBJ) boot.s
 	aln -c myboot.lnk 
 
 
-
-
+	#DOSBox or DOSBoxX
+	#warning this deletes everything with .j64 in the src folder - back your shit up
 clean:
 	del *.o
 	del *.abs
 	del temp*.bin
-	del JagDoom.j64
+	del *  .j64
 	if exist C:\Jaguar\temp\*.* del C:\Jaguar\temp\*.*
 	#copy /b init.sav init.o
 	#disabled compile of init.s to use old init.sav
@@ -283,7 +282,6 @@ clean:
 	
 	#Cygwin COMPILE - open Cygwin terminal - make rom and make rom2 are now done in Cygwin
 	#cd /cygdrive/c/Jaguar/src
-	
 rom:
 	rm -f /cygdrive/c/Jaguar/Temp/temp1.bin /cygdrive/c/Jaguar/Temp/temp2.bin /cygdrive/c/Jaguar/Temp/temp3.bin /cygdrive/c/Jaguar/Temp/JagDoomEX.j64
 	cat /cygdrive/c/Jaguar/src/Univ.bin /cygdrive/c/Jaguar/src/boot.abs /cygdrive/c/Jaguar/src/doom.abs > /cygdrive/c/Jaguar/Temp/temp1.bin
@@ -293,12 +291,19 @@ rom:
 	mv /cygdrive/c/Jaguar/Temp/JagDoomEX.j64 /cygdrive/c/Jaguar/src/
 
 
-
+	#Via Cygwin compile directly to gamedrive - no need to make rom make abs and make boot and open cygwin  
+	#see JagGD Cygwin Instructions
+	#cd /cygdrive/c/Jaguar/src
 usb:
-	/cygdrive/c/Jaguar/src/JagGD.exe -rd
-	/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000
-	/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000
-	/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000
+	/cygdrive/c/Jaguar/src/JagGD.exe -rd								
+	#resets Jaguar / Gamedrive
+	/cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000				
+	#loads ABS to address
+	/cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000				
+	#loads WAD to address
+	/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000							
+	#loads the game at the address
+
 
 
 #wad:
