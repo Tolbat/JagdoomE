@@ -73,7 +73,7 @@ open DosBox 74-3 and type
 MOUNT C C:\ 
 ```
 ```
-C 
+C: 
 ```
 
 A warning will appear, ignore it.
