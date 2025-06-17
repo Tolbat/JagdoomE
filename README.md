@@ -70,7 +70,10 @@ Rename setpath.txt to setpath.bat and place setpath.bat in the root of C:\
 open DosBox 74-3 and type 
 
 ```
-mount C: C:\ 
+MOUNT C C:\ 
+```
+```
+C 
 ```
 
 A warning will appear, ignore it.
