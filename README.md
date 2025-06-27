@@ -1,4 +1,4 @@
-# Doom for the Atari Jaguar - Jaguar Doom Evolved (JagdoomE)
+# Doom for the Atari Jaguar - Jaguar Doom Expanded (JagdoomE)
 
 Now with Functional in game music.  Works Perfectly on BigPEmu, and good on real console, there is some slowdown currently but that is being worked on.
 
