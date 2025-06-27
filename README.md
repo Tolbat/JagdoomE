@@ -1,6 +1,8 @@
 # Doom for the Atari Jaguar - Jaguar Doom Evolved (JagdoomE)
 
-Now with Functional in game music.  Works Perfectly on BigPEmu, and very good on real console, there is some slowdown currently but that is being worked on.
+Now with Functional in game music.  Works Perfectly on BigPEmu, and good on real console, there is some slowdown currently but that is being worked on.
+
+This project is the Windows version of JagDoomEx hosted by Chilly.
 
 This project allows you to build Doom for the Atari Jaguar on a Windows 10 computer. It uses old toolchain released by Atari which was put into the Public Domain.  
 We can thank Carl Forhan from Songbird Productions for talking to John Carmack and getting the source code released. 
