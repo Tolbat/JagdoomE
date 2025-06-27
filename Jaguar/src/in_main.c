@@ -312,7 +312,7 @@ void IN_Start (void)
 		
 	DoubleBufferSetup ();
 
-	S_StartSong(mus_intro, 0);
+	S_StartSong(mus_e2m3, 1);
 }
 
 void IN_Stop (void)

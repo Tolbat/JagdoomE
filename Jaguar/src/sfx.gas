@@ -80,51 +80,102 @@ sw_zero		.equr	r21
 sw_looppoint .equr	r22
 sw_mask		.equr	r23
 
-    .extern _sfxsample                  ; Declare external reference to _sfxsample variable
+	.extern	_sfxsample
+	
+	load	(FP),sw_samples
+	shlq	#2,sw_samples			; in quads
+	
+	moveq	#0,sw_zero
+	movei	#$ffff,sw_mask
+	
+	movei	#_sfxsample,scratch2
+	load	(scratch2),scratch
+	move	scratch,sw_dest
+	
+	add		sw_samples,scratch
+	add		sw_samples,scratch			; 11khz sfx are doubled for 22khz isr
+	store	scratch,(scratch2)			; sfxsample += samples*2
 
-    load    (FP),sw_samples             ; Load number of samples to process from frame pointer
-    shlq    #2,sw_samples               ; Multiply samples by 4 (convert to quads)
-    moveq   #0,sw_zero                  ; Set sw_zero to 0 for clearing buffer slots
-    movei   #$ffff,sw_mask              ; Set sw_mask to $ffff (16-bit mask for sample clamping)
-    movei   #_sfxsample,scratch2        ; Load address of _sfxsample into scratch2
-    load    (scratch2),scratch          ; Load current SFX sample position from _sfxsample
-    move    scratch,sw_dest             ; Copy SFX position to sw_dest (destination pointer)
-    add     sw_samples,scratch          ; Add samples to position (for 11kHz doubling)
-    add     sw_samples,scratch          ; Add samples again (doubles SFX for 22kHz ISR)
-    store   scratch,(scratch2)          ; Store updated position back to _sfxsample
-    shlq    #1,sw_dest                  ; Shift sw_dest left by 1 (multiply by 2 for byte offset)
-    movei   #$1fff,scratch              ; Set scratch to $1fff (mask for 8k buffer wrap)
-    and     scratch,sw_dest             ; Apply mask to sw_dest (wrap within 8k buffer)
-    movei   #$1f0000,scratch            ; Load base address of _soundbuffer ($1f0000)
-    add     scratch,sw_dest             ; Add base to sw_dest (final _soundbuffer address)
-    movei   #_internalbuffer,sw_source  ; Load address of _internalbuffer (SFX source)
-    movei   #satloop,sw_looppoint       ; Set sw_looppoint to satloop label (loop entry)
-    load    (sw_source),sw_sample       ; Load first SFX sample from _internalbuffer (delay slot)
+	shlq	#1,sw_dest                  ; 16-bit samples
+	movei	#$1fff,scratch
+	and		scratch,sw_dest
+	movei	#$1f0000,scratch
+	add		scratch,sw_dest				; sw_dest = externbuffer[(sfxsample*2)&0x1FFF]
+	
+	movei	#_internalbuffer,sw_source
 
+    movei   #_music,scratch
+    load    (scratch),scratch
+    moveq   #0,r1
+    cmp     r1,scratch
+    jr      EQ,sfxloop                  ; just sfx
+    nop
+
+    movei   #musloop,scratch
+    jump    T,(scratch)                 ; mix sfx with music
+    nop
+
+sfxloop:
+	movei	#satloop,sw_looppoint
+	load	(sw_source),sw_sample		; delay slotted
 satloop:
-    store   sw_zero,(sw_source)         ; Clear current _internalbuffer slot with 0
-    addq    #4,sw_source                ; Increment sw_source by 4 (next sample slot)
-    sharq   #8,sw_sample                ; Shift SFX sample right 8 bits (32-bit to 24-bit)
-    sat16s  sw_sample                   ; Saturate SFX sample to 16-bit signed range
-    load    (sw_dest),scratch           ; Load current mono sample from _soundbuffer (32-bit word)
-    move    scratch,scratch2            ; Copy mono sample for duplicate processing
-    sharq   #16,scratch2                ; Extract lower 16-bit mono sample (for DAC duplication)
-    shlq    #16,scratch                 ; Shift upper 16-bit mono sample into position
-    sharq   #16,scratch                 ; Extract upper 16-bit mono sample (same as lower)
-    sub     sw_sample,scratch           ; Subtract SFX from mono sample (first copy)
-    sat16s  scratch                     ; Saturate mixed mono sample (first copy)
-    sub     sw_sample,scratch2          ; Subtract SFX from mono sample (second copy)
-    sat16s  scratch2                    ; Saturate mixed mono sample (second copy)
-    move    scratch2,sw_combined        ; Move second mono copy to sw_combined
-    shlq    #16,sw_combined             ; Shift second copy into upper 16 bits
-    add     scratch,sw_combined         ; Combine with first copy (duplicate mono for DACs)
-    store   sw_combined,(sw_dest)       ; Store duplicated mono sample back to _soundbuffer
-    addqmod #4,sw_dest                  ; Increment sw_dest by 4 with modulo wrap (next slot)
-    subq    #1,sw_samples               ; Decrease sample count by 1
-    jump    NE,(sw_looppoint)           ; Jump to satloop if samples remain (not equal to 0)
-    load    (sw_source),sw_sample       ; Load next SFX sample (delay slot)
-    jump    T,(RETURNPOINT)             ; Jump to return point when done
-    nop                                 ; No-op for delay slot alignment
+	store	sw_zero,(sw_source)
+	addq	#4,sw_source
+	
+	sharq	#8,sw_sample
+	sat16s	sw_sample
+    and     sw_mask,sw_sample
+
+	move	sw_sample,sw_combined
+	shlq	#16,sw_combined
+	add		sw_sample,sw_combined
+
+	store	sw_combined,(sw_dest)
+	addqmod	#4,sw_dest
+
+	subq	#1,sw_samples
+	jump	NE,(sw_looppoint)
+	load	(sw_source),sw_sample		; delay slot
+	
+	jump	T,(RETURNPOINT)
+	nop
+
+musloop:
+	movei	#msatloop,sw_looppoint
+	load	(sw_source),sw_sample		; delay slotted
+msatloop:
+	store	sw_zero,(sw_source)
+	addq	#4,sw_source
+	
+    load    (sw_dest),scratch
+
+	sharq	#8,sw_sample
+	sat16s	sw_sample
+
+    move    scratch,scratch2
+    shlq    #16,scratch
+    sharq   #16,scratch2
+    sharq   #16,scratch
+
+    add     sw_sample,scratch2
+    add     sw_sample,scratch
+    sat16s  scratch2
+	sat16s  scratch
+
+	move	scratch2,sw_combined
+	shlq	#16,sw_combined
+	add		scratch,sw_combined
+
+	store	sw_combined,(sw_dest)
+	addqmod	#4,sw_dest
+
+	subq	#1,sw_samples
+	jump	NE,(sw_looppoint)
+	load	(sw_source),sw_sample		; delay slot
+	
+	jump	T,(RETURNPOINT)
+	nop
+
 
 ;============================================================================	
 ;PaintChannel (unsigned *samples, int *dest, int count, int volume)
@@ -499,6 +550,7 @@ L41:
  .extern _finalquad
  .extern _sfxchannels
  .extern _S_WriteOutSamples
+ .extern _music
 
 	.phrase
 	.68000
