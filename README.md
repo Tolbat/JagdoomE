@@ -121,7 +121,7 @@ Now that you have doom.abs we can continue.
 ## STEP 3
 
 ```
-make boot 
+make boot
 ```
 
 creates needed bootfiles
@@ -158,13 +158,13 @@ Connect the Gamedrive to a USB port on your computer (ensure the cable is a data
 Wait for the USB to be detected and installed
 
 Load Cygwin
-cd /cygdrive/c/Jaguar/src					this puts you in the correct directory if it matches mine
+cd /cygdrive/c/Jaguar/src		this puts you in the correct directory if it matches mine
 
 usb:
-/cygdrive/c/Jaguar/src/JagGD.exe -rd						resets Jaguar / Gamedrive
+/cygdrive/c/Jaguar/src/JagGD.exe -rd				resets Jaguar / Gamedrive
 /cygdrive/c/Jaguar/src/JagGD.exe -u DOOM.ABS,a:0x2000		loads ABS to address
 /cygdrive/c/Jaguar/src/JagGD.exe -u doom.wad,a:0x840000		loads WAD to address
-/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000					loads the game at the address
+/cygdrive/c/Jaguar/src/JagGD.exe -x 0x2000			loads the game at the address
 
 ```
 
