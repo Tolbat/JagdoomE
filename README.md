@@ -136,7 +136,7 @@ STOP HERE - Make sure doom.abs, boot.abs, and doom.wad are all located in C:\jag
 cd /cygdrive/c/Jaguar/src
 
 ```
-make rom:
+make rom
 ```
 
 This merges the boot.abs and doom.abs, after it pads it to 256k.  No more extra steps to pad the files.
