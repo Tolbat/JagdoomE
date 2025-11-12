@@ -1,6 +1,6 @@
 # Doom for the Atari Jaguar - Jaguar Doom Expanded (JagdoomE)
 
-Now with Functional in game music.  Works Perfectly on BigPEmu, and good on real console, there is some slowdown currently but that is being worked on.
+Now with Functional in game music.  Works Perfectly on BigPEmu, and good on real console, there is some minor slowdown currently but that is being worked on.
 
 This project is the Windows version of JagDoomEx hosted by Chilly.
 
@@ -22,8 +22,8 @@ and use the makefile from this one.  Currently there are some things I want to d
 ## Additional Tools Required for Windows
 
 
-1 - DosBox 74-3
-
+1 - DosBox X version 2025.02.1
+	Use the attached dosbox-x.conf to customize DosBox X to not crash during build.
 
 2 - Python for windows
 
@@ -31,10 +31,7 @@ and use the makefile from this one.  Currently there are some things I want to d
 3 - GetTheWad.py - provided by Tolbat
 
 
-4 - PadTempBin1.py - old method provided by Tolbat
-
-
-5 - Cygwin - now required - use OldMakefile for old build
+4 - Cygwin - now required - use OldMakefile for old build
 
 	Please download Cygwin for windows with the following ADD ONS:
 	gcc-core → Select for installation (C Compiler)
@@ -70,7 +67,7 @@ You may use any drive you wish but you will need to update all the different fil
 
 Place the Jaguar folder in the root of C:\
 Rename setpath.txt to setpath.bat and place setpath.bat in the root of C:\
-open DosBox 74-3 and type 
+open DosBox X and type 
 
 ```
 MOUNT C C:\ 
@@ -108,13 +105,6 @@ TO BUILD THE DOOM GAME FOR JAGUAR # must start by creating doom.abs
 make
 ```
 
-```
-Note: 
-In WINDOWS ONLY DosBox runs out of table memory when moving the temp files around.
-DosBox and DosBoxX will both crash with a warning that says "Not Enough Memory for Internal Tables".
-Reopen DosBox and use make jagdoom command again, do this until it spits out #doom.abs
-From the beginning of the process if you open DosBox and do make clean, then make it should only crash once, and does NOT effect the compile process.
-Now that you have doom.abs we can continue.
 ```
 
 
