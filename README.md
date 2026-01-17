@@ -191,8 +191,8 @@ number pad, which also affects the ProPad controller.
 9 = select PLASMA RIFLE
 * = toggle between FIST/CHAINSAW
 0 = select BFG9000
-# = select AUTOMAP
-* + # = reset game
+(# = select AUTOMAP)
+(* + # = reset game)
 ```
 4 and 6 are the same as the LEFT and RIGHT shoulder buttons on the ProPad, which
 is why they are set for strafing. I set 2 and 5 to forward and backward because
